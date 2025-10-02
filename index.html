@@ -3,138 +3,476 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Izzys Spending tracker</title>
+  <title>UK Defence Intelligence Hub</title>
+  <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="app-header">
-    <h1 class="brand">Izzys Spending tracker</h1>
+    <h1 class="brand">UK Defence Intelligence</h1>
+    <nav class="main-nav">
+      <a href="#home">Home</a>
+      <a href="#news">News</a>
+      <a href="#primes">UK Defence Primes</a>
+      <a href="#enterprise">UK Defence Enterprise</a>
+      <a href="#us-defence">US Defence</a>
+      <a href="#resources">Resources</a>
+    </nav>
   </header>
 
   <main class="container">
-    <section class="card">
-      <h2>Add Purchase</h2>
-      <form id="purchase-form" autocomplete="off">
-        <div class="grid">
-          <label>
-            <span>Item</span>
-            <input id="item" name="item" type="text" required placeholder="e.g., Latte">
-          </label>
-          <label>
-            <span>Category</span>
-            <select id="category" name="category">
-              <option value="">Select category</option>
-              <option>Groceries</option>
-              <option>Dining Out & Coffee</option>
-              <option>Beauty & Personal Care</option>
-              <option>Fashion & Accessories</option>
-              <option>Fitness & Wellness</option>
-              <option>Transport & Rides</option>
-            </select>
-          </label>
-          <label>
-            <span>Amount</span>
-            <input id="price" name="price" type="number" step="0.01" min="0" required placeholder="0.00">
-          </label>
-          <label>
-            <span>When</span>
-            <div class="today-wrap">
-              <label class="inline"><input id="was-today" type="checkbox" checked> Was this today?</label>
-              <input id="date" name="date" type="date" class="hidden">
+    <section id="home" class="hero">
+      <h2>UK Defence Intelligence Hub</h2>
+      <p>Comprehensive coverage of UK defence news, focusing on major defence primes: BAE Systems, Thales, Babcock, and QinetiQ.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number" id="total-articles">0</span>
+          <span class="stat-label">Articles Today</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">4</span>
+          <span class="stat-label">Major Primes</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" id="active-sources">0</span>
+          <span class="stat-label">UK Sources</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="news" class="card">
+      <div class="section-header">
+        <h2>Latest UK Defence News</h2>
+        <div class="news-controls">
+          <select id="prime-filter" class="filter-select">
+            <option value="all">All Defence Primes</option>
+            <option value="bae">BAE Systems</option>
+            <option value="thales">Thales</option>
+            <option value="babcock">Babcock</option>
+            <option value="qinetiq">QinetiQ</option>
+          </select>
+          <button id="refresh-news" class="refresh-btn">Refresh</button>
+        </div>
+      </div>
+      <div class="news-grid" id="news-grid">
+        <div class="loading">Loading latest news...</div>
+      </div>
+    </section>
+
+    <section id="primes" class="card">
+      <h2>UK Defence Primes</h2>
+      <div class="primes-grid">
+        <div class="prime-card" data-prime="bae">
+          <div class="prime-header">
+            <h3>BAE Systems</h3>
+            <span class="prime-ticker">BA.L</span>
+          </div>
+          <p>Global defence, aerospace and security company with significant UK operations.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">£25.2B</span>
             </div>
-          </label>
+            <div class="stat-item">
+              <span class="stat-label">Employees</span>
+              <span class="stat-value">93,100</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="bae-chart" height="120"></canvas>
+          </div>
         </div>
-        <div class="actions">
-          <button type="submit" class="primary">Add</button>
-          <button type="button" id="reset-form" class="ghost">Reset</button>
+        
+        <div class="prime-card" data-prime="thales">
+          <div class="prime-header">
+            <h3>Thales</h3>
+            <span class="prime-ticker">HO.PA</span>
+          </div>
+          <p>French multinational with major UK defence operations and partnerships.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">€25.8B</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">UK Employees</span>
+              <span class="stat-value">6,500</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="thales-chart" height="120"></canvas>
+          </div>
         </div>
-      </form>
-    </section>
+        
+        <div class="prime-card" data-prime="babcock">
+          <div class="prime-header">
+            <h3>Babcock</h3>
+            <span class="prime-ticker">BAB.L</span>
+          </div>
+          <p>Engineering services company supporting defence and emergency services.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">£1.8B</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Employees</span>
+              <span class="stat-value">25,000</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="babcock-chart" height="120"></canvas>
+          </div>
+        </div>
+        
+        <div class="prime-card" data-prime="qinetiq">
+          <div class="prime-header">
+            <h3>QinetiQ</h3>
+            <span class="prime-ticker">QQ.L</span>
+          </div>
+          <p>Science and engineering company providing technology and innovation services.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">£2.1B</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Employees</span>
+              <span class="stat-value">6,000</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="qinetiq-chart" height="120"></canvas>
+          </div>
+        </div>
 
+        <div class="prime-card" data-prime="rolls-royce">
+          <div class="prime-header">
+            <h3>Rolls-Royce</h3>
+            <span class="prime-ticker">RR.L</span>
+          </div>
+          <p>Global power systems company with significant defence aerospace and marine operations.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">£8.5B</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Employees</span>
+              <span class="stat-value">42,000</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="rolls-royce-chart" height="120"></canvas>
+          </div>
+        </div>
 
-    <section class="card">
-      <div class="list-header">
-        <h2>Purchases</h2>
-        <div class="actions">
-          <button id="export-json" class="ghost">Export JSON</button>
-          <label class="import-btn">
-            <input id="import-json" type="file" accept="application/json">
-            <span>Import JSON</span>
-          </label>
-          <button id="clear-all" class="danger ghost">Clear All</button>
+        <div class="prime-card" data-prime="cobham">
+          <div class="prime-header">
+            <h3>Cobham</h3>
+            <span class="prime-ticker">COB.L</span>
+          </div>
+          <p>Defence and aerospace technology company specializing in communications and electronic warfare.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">£4.1B</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Employees</span>
+              <span class="stat-value">10,000</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="cobham-chart" height="120"></canvas>
+          </div>
         </div>
       </div>
-      <div class="totals" id="totals"></div>
-      <div class="table-wrapper">
-        <table id="purchase-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Item</th>
-              <th>Category</th>
-              <th class="num">Amount</th>
-              <th></th>
-            </tr>
-            <tr class="filters-row">
-              <th>
-                <div class="filters">
-                  <input id="filter-from" type="date" placeholder="From">
-                  <input id="filter-to" type="date" placeholder="To">
-                </div>
-              </th>
-              <th><input id="filter-text" type="text" placeholder="Search item"></th>
-              <th>
-                <select id="filter-category">
-                  <option value="">All categories</option>
-                  <option>Groceries</option>
-                  <option>Dining Out & Coffee</option>
-                  <option>Beauty & Personal Care</option>
-                  <option>Fashion & Accessories</option>
-                  <option>Fitness & Wellness</option>
-                  <option>Transport & Rides</option>
-                </select>
-              </th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="purchase-tbody"></tbody>
-        </table>
+    </section>
+
+    <section id="enterprise" class="card">
+      <h2>How UK Defence Enterprise Works</h2>
+      <div class="enterprise-content">
+        <div class="enterprise-section">
+          <h3>Government Structure</h3>
+          <div class="org-chart">
+            <div class="org-level">
+              <div class="org-item primary">
+                <h4>Ministry of Defence (MoD)</h4>
+                <p>Overall responsibility for UK defence policy and armed forces</p>
+              </div>
+            </div>
+            <div class="org-level">
+              <div class="org-item">
+                <h4>Defence Equipment & Support (DE&S)</h4>
+                <p>Procurement and support of military equipment</p>
+              </div>
+              <div class="org-item">
+                <h4>Defence Science & Technology Laboratory (Dstl)</h4>
+                <p>Research and development for defence</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="enterprise-section">
+          <h3>Procurement Process</h3>
+          <div class="process-steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Requirements Definition</h4>
+                <p>MoD defines operational requirements and capability gaps</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Competition & Tender</h4>
+                <p>DE&S runs competitive procurement processes</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Contract Award</h4>
+                <p>Prime contractors selected based on capability and value</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Delivery & Support</h4>
+                <p>Ongoing delivery, testing, and through-life support</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="enterprise-section">
+          <h3>Key Programmes</h3>
+          <div class="programmes-grid">
+            <div class="programme-item">
+              <h4>Type 26 Frigate</h4>
+              <p>BAE Systems - Anti-submarine warfare frigates</p>
+            </div>
+            <div class="programme-item">
+              <h4>Watchkeeper</h4>
+              <p>Thales - Unmanned aerial vehicle system</p>
+            </div>
+            <div class="programme-item">
+              <h4>Astute Class</h4>
+              <p>Babcock - Nuclear-powered attack submarines</p>
+            </div>
+            <div class="programme-item">
+              <h4>Typhoon Support</h4>
+              <p>QinetiQ - Test and evaluation services</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-    <section class="card">
-      <h2>Spending by Week</h2>
-      <canvas id="spend-chart" height="160"></canvas>
+
+    <section id="us-defence" class="card">
+      <h2>US Defence Contractors</h2>
+      <div class="primes-grid">
+        <div class="prime-card" data-prime="lockheed">
+          <div class="prime-header">
+            <h3>Lockheed Martin</h3>
+            <span class="prime-ticker">LMT</span>
+          </div>
+          <p>Global aerospace, defence, arms, security, and advanced technologies company.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">$110.2B</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Employees</span>
+              <span class="stat-value">116,000</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="lockheed-chart" height="120"></canvas>
+          </div>
+        </div>
+
+        <div class="prime-card" data-prime="boeing">
+          <div class="prime-header">
+            <h3>Boeing</h3>
+            <span class="prime-ticker">BA</span>
+          </div>
+          <p>Multinational corporation that designs, manufactures, and sells airplanes, rotorcraft, rockets, and satellites.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">$142.8B</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Employees</span>
+              <span class="stat-value">142,000</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="boeing-chart" height="120"></canvas>
+          </div>
+        </div>
+
+        <div class="prime-card" data-prime="raytheon">
+          <div class="prime-header">
+            <h3>Raytheon Technologies</h3>
+            <span class="prime-ticker">RTX</span>
+          </div>
+          <p>Multinational aerospace and defence conglomerate formed by the merger of Raytheon and United Technologies.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">$125.4B</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Employees</span>
+              <span class="stat-value">174,000</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="raytheon-chart" height="120"></canvas>
+          </div>
+        </div>
+
+        <div class="prime-card" data-prime="northrop">
+          <div class="prime-header">
+            <h3>Northrop Grumman</h3>
+            <span class="prime-ticker">NOC</span>
+          </div>
+          <p>Multinational aerospace and defence technology company specializing in autonomous systems and cyber security.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">$68.9B</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Employees</span>
+              <span class="stat-value">90,000</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="northrop-chart" height="120"></canvas>
+          </div>
+        </div>
+
+        <div class="prime-card" data-prime="general-dynamics">
+          <div class="prime-header">
+            <h3>General Dynamics</h3>
+            <span class="prime-ticker">GD</span>
+          </div>
+          <p>Multinational aerospace and defence corporation specializing in business aviation, combat vehicles, and submarines.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">$67.2B</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Employees</span>
+              <span class="stat-value">106,000</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="general-dynamics-chart" height="120"></canvas>
+          </div>
+        </div>
+
+        <div class="prime-card" data-prime="l3harris">
+          <div class="prime-header">
+            <h3>L3Harris Technologies</h3>
+            <span class="prime-ticker">LHX</span>
+          </div>
+          <p>Technology company specializing in defence and commercial communications, electronic warfare, and space systems.</p>
+          <div class="prime-stats">
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span class="stat-value">$37.8B</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Employees</span>
+              <span class="stat-value">48,000</span>
+            </div>
+          </div>
+          <div class="stock-chart">
+            <canvas id="l3harris-chart" height="120"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="enterprise-section">
+        <h3>US Defence Enterprise Structure</h3>
+        <div class="org-chart">
+          <div class="org-level">
+            <div class="org-item primary">
+              <h4>Department of Defense (DoD)</h4>
+              <p>Overall responsibility for US military policy and armed forces</p>
+            </div>
+          </div>
+          <div class="org-level">
+            <div class="org-item">
+              <h4>Defense Advanced Research Projects Agency (DARPA)</h4>
+              <p>Research and development for emerging technologies</p>
+            </div>
+            <div class="org-item">
+              <h4>Defense Logistics Agency (DLA)</h4>
+              <p>Supply chain management and logistics support</p>
+            </div>
+            <div class="org-item">
+              <h4>Defense Contract Management Agency (DCMA)</h4>
+              <p>Contract administration and oversight</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resources" class="card">
+      <h2>UK Defence Resources</h2>
+      <div class="resources-grid">
+        <div class="resource-category">
+          <h3>Government Sources</h3>
+          <ul>
+            <li><a href="https://www.gov.uk/government/organisations/ministry-of-defence" target="_blank">Ministry of Defence</a></li>
+            <li><a href="https://www.gov.uk/government/organisations/defence-equipment-and-support" target="_blank">Defence Equipment & Support</a></li>
+            <li><a href="https://www.gov.uk/government/organisations/defence-science-and-technology-laboratory" target="_blank">Dstl</a></li>
+          </ul>
+        </div>
+        <div class="resource-category">
+          <h3>Industry Sources</h3>
+          <ul>
+            <li><a href="https://www.baesystems.com" target="_blank">BAE Systems</a></li>
+            <li><a href="https://www.thalesgroup.com" target="_blank">Thales</a></li>
+            <li><a href="https://www.babcockinternational.com" target="_blank">Babcock</a></li>
+            <li><a href="https://www.qinetiq.com" target="_blank">QinetiQ</a></li>
+          </ul>
+        </div>
+        <div class="resource-category">
+          <h3>News Sources</h3>
+          <ul>
+            <li><a href="https://www.janes.com" target="_blank">Jane's Defence</a></li>
+            <li><a href="https://www.defensenews.com" target="_blank">Defense News</a></li>
+            <li><a href="https://www.flightglobal.com" target="_blank">FlightGlobal</a></li>
+            <li><a href="https://www.defenceprocurementinternational.com" target="_blank">Defence Procurement International</a></li>
+          </ul>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer class="app-footer">
-    <small>Data is stored locally in your browser.</small>
+    <p>&copy; 2024 Defence Info Website. All rights reserved.</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="app.js"></script>
-  <script>
-    const dateEl = document.getElementById('date');
-    const wasToday = document.getElementById('was-today');
-    if (wasToday && dateEl) {
-      const setToday = () => {
-        const now = new Date();
-        dateEl.valueAsNumber = now - (now.getTimezoneOffset() * 60000);
-      };
-      setToday();
-      wasToday.addEventListener('change', () => {
-        dateEl.classList.toggle('hidden', wasToday.checked);
-        if (wasToday.checked) setToday();
-      });
-      dateEl.classList.add('hidden');
-    }
-  </script>
-  
 </body>
 </html>
+
 
 
