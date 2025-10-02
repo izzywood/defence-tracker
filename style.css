@@ -1,0 +1,591 @@
+:root {
+  --bg: #0a0e1a;
+  --card: #1a1f2e;
+  --text: #e8eaed;
+  --muted: #9aa0a6;
+  --primary: #60a5fa;
+  --accent: #059669;
+  --danger: #dc2626;
+  --border: #3c4043;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --bae-color: #60a5fa;
+  --thales-color: #059669;
+  --babcock-color: #dc2626;
+  --qinetiq-color: #7c3aed;
+  --rolls-royce-color: #f59e0b;
+  --cobham-color: #10b981;
+  --lockheed-color: #ef4444;
+  --boeing-color: #3b82f6;
+  --raytheon-color: #8b5cf6;
+  --northrop-color: #06b6d4;
+  --general-dynamics-color: #f97316;
+  --l3harris-color: #84cc16;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.app-header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.main-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.main-nav a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.main-nav a:hover {
+  background: var(--border);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--card) 0%, var(--bg) 100%);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.card h2 {
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.news-grid,
+.analysis-grid,
+.resources-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.news-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.analysis-grid {
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.resources-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.news-item,
+.analysis-item,
+.resource-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.news-item:hover,
+.analysis-item:hover,
+.resource-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.news-item h3,
+.analysis-item h3,
+.resource-item h3 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.date {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.resource-item ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.resource-item li {
+  margin-bottom: 0.5rem;
+}
+
+.resource-item a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.resource-item a:hover {
+  color: var(--primary);
+}
+
+.app-footer {
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  padding: 2rem;
+  text-align: center;
+  color: var(--muted);
+  margin-top: 4rem;
+}
+
+/* News Controls */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.news-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.filter-select, .refresh-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.refresh-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.refresh-btn:hover {
+  background: #3b82f6;
+}
+
+/* Defence Primes */
+.primes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.prime-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.prime-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.prime-card[data-prime="bae"] {
+  border-left: 4px solid var(--bae-color);
+}
+
+.prime-card[data-prime="thales"] {
+  border-left: 4px solid var(--thales-color);
+}
+
+.prime-card[data-prime="babcock"] {
+  border-left: 4px solid var(--babcock-color);
+}
+
+.prime-card[data-prime="qinetiq"] {
+  border-left: 4px solid var(--qinetiq-color);
+}
+
+.prime-card[data-prime="rolls-royce"] {
+  border-left: 4px solid var(--rolls-royce-color);
+}
+
+.prime-card[data-prime="cobham"] {
+  border-left: 4px solid var(--cobham-color);
+}
+
+.prime-card[data-prime="lockheed"] {
+  border-left: 4px solid var(--lockheed-color);
+}
+
+.prime-card[data-prime="boeing"] {
+  border-left: 4px solid var(--boeing-color);
+}
+
+.prime-card[data-prime="raytheon"] {
+  border-left: 4px solid var(--raytheon-color);
+}
+
+.prime-card[data-prime="northrop"] {
+  border-left: 4px solid var(--northrop-color);
+}
+
+.prime-card[data-prime="general-dynamics"] {
+  border-left: 4px solid var(--general-dynamics-color);
+}
+
+.prime-card[data-prime="l3harris"] {
+  border-left: 4px solid var(--l3harris-color);
+}
+
+.prime-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.prime-header h3 {
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.prime-ticker {
+  background: var(--border);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.prime-stats {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.stock-chart {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: var(--bg);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+/* Enterprise Section */
+.enterprise-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.enterprise-section h3 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.org-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.org-level {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.org-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
+  flex: 1;
+  max-width: 300px;
+}
+
+.org-item.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.org-item h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.org-item p {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.org-item.primary p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.step-number {
+  background: var(--primary);
+  color: white;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.step-content h4 {
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.step-content p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.programmes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.programme-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.programme-item h4 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.programme-item p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* News Items */
+.news-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.news-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.news-item.prime-bae {
+  border-left: 4px solid var(--bae-color);
+}
+
+.news-item.prime-thales {
+  border-left: 4px solid var(--thales-color);
+}
+
+.news-item.prime-babcock {
+  border-left: 4px solid var(--babcock-color);
+}
+
+.news-item.prime-qinetiq {
+  border-left: 4px solid var(--qinetiq-color);
+}
+
+.news-item h3 {
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.news-item h3 a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.news-item h3 a:hover {
+  color: var(--primary);
+}
+
+.news-item .source {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.news-item .date {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.loading {
+  text-align: center;
+  color: var(--muted);
+  padding: 2rem;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .main-nav {
+    gap: 1rem;
+  }
+  
+  .container {
+    padding: 1rem;
+  }
+  
+  .hero h2 {
+    font-size: 2rem;
+  }
+  
+  .hero-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .news-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .news-grid,
+  .primes-grid,
+  .programmes-grid,
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .org-level {
+    flex-direction: column;
+  }
+  
+  .process-steps {
+    grid-template-columns: 1fr;
+  }
+}
